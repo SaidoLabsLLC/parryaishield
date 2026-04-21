@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ParryAI — Privacy Policy</title>
+<style>
+  :root {
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #07080C;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 40px 20px 80px;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 28px;
+    color: #FFFFFF;
+    margin: 0 0 8px;
+    letter-spacing: 0.3px;
+  }
+  h2 {
+    font-size: 18px;
+    color: #FFFFFF;
+    margin: 36px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1a1d24;
+  }
+  p, li { font-size: 14.5px; }
+  ul { padding-left: 22px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid #1a1d24;
+  }
+  th { background: #111318; color: #FFFFFF; font-weight: 600; }
+  code {
+    background: #111318;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+  }
+  .meta {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+  a { color: #9EC5E8; }
+  a:hover { color: #FFFFFF; }
+  a:focus-visible {
+    outline: 2px solid #00FF88;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .nav {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 24px;
+  }
+  .nav a { margin-right: 14px; }
+  strong { color: #FFFFFF; }
+</style>
+</head>
+<body>
+<main>
+  <div class="nav">
+    <a href="terms.html">Terms of Service</a>
+    <a href="https://parryai.com">parryai.com</a>
+  </div>
+
+  <h1>Privacy Policy — ParryAI Chrome Extension</h1>
+  <p class="meta">
+    Effective Date: April 20, 2026 &middot; Developer: Saido Labs LLC &middot; Primary contributor: Jesse Crawford
+  </p>
+
+  <h2>1. Overview</h2>
+  <p>
+    ParryAI is a browser extension that protects you from prompt injection
+    attacks when using AI assistants (ChatGPT, Claude, and Gemini). This
+    policy explains what data the extension accesses, how it is processed,
+    and what controls you have.
+  </p>
+  <p>
+    <strong>Core principle: your prompts never leave your browser.</strong>
+    All detection runs locally inside the extension using a heuristic engine.
+  </p>
+
+  <h2>2. Data We Access and How It Is Processed</h2>
+  <h3 style="font-size:15px;color:#FFF;margin-top:18px">2.1 Prompt text (AI request bodies)</h3>
+  <p>
+    When you submit a message to ChatGPT, Claude, or Gemini, ParryAI
+    intercepts the outgoing request at the browser level — <strong>before
+    it is transmitted to the AI provider</strong> — and extracts your
+    user-facing message text.
+  </p>
+  <table>
+    <tr><th>What happens</th><th>Detail</th></tr>
+    <tr><td>Where it is processed</td><td>Entirely on your device, inside the extension's service worker.</td></tr>
+    <tr><td>Is it transmitted externally?</td><td><strong>No.</strong> The text is passed to the local detection engine and immediately discarded after scoring.</td></tr>
+    <tr><td>Is the raw prompt text stored?</td><td><strong>No.</strong></td></tr>
+    <tr><td>What is stored?</td><td>Only the scan result metadata: threat score (0–1), severity label, category tag, source URL, and timestamp. Kept in <code>chrome.storage.session</code> (cleared when the browser closes) and capped at the 200 most recent entries.</td></tr>
+  </table>
+
+  <h3 style="font-size:15px;color:#FFF;margin-top:18px">2.2 Settings</h3>
+  <p>
+    The following settings are stored in <code>chrome.storage.local</code>
+    (persistent, local to your device):
+  </p>
+  <table>
+    <tr><th>Key</th><th>Purpose</th></tr>
+    <tr><td><code>scanningEnabled</code></td><td>Global on/off toggle</td></tr>
+    <tr><td><code>blockThreshold</code></td><td>Minimum score to block a request (default 0.6)</td></tr>
+    <tr><td><code>providerChatGPT</code></td><td>Whether ChatGPT scanning is enabled</td></tr>
+    <tr><td><code>providerClaude</code></td><td>Whether Claude scanning is enabled</td></tr>
+    <tr><td><code>providerGemini</code></td><td>Whether Gemini scanning is enabled</td></tr>
+  </table>
+  <p>Settings data never leaves your device.</p>
+
+  <h3 style="font-size:15px;color:#FFF;margin-top:18px">2.3 Session threat history</h3>
+  <p>
+    ParryAI maintains a rolling window of up to 200 scan results per browser
+    session in <code>chrome.storage.session</code>. Each entry contains a
+    timestamp, threat score and severity, category tag, source URL, and
+    request source type (fetch or XHR). This history is displayed in the
+    popup's threat timeline and is <strong>automatically erased when you
+    close the browser</strong>. It is never uploaded or synced anywhere.
+  </p>
+
+  <h2>3. Data We Do NOT Collect</h2>
+  <ul>
+    <li>We do <strong>not</strong> log, transmit, or store your prompt text.</li>
+    <li>We do <strong>not</strong> collect your browsing history.</li>
+    <li>We do <strong>not</strong> use third-party analytics, telemetry, or crash-reporting services.</li>
+    <li>We do <strong>not</strong> track users across websites.</li>
+    <li>We do <strong>not</strong> share any data with third parties.</li>
+  </ul>
+
+  <h2>4. Permissions</h2>
+  <table>
+    <tr><th>Permission</th><th>Why it is needed</th></tr>
+    <tr><td><code>storage</code></td><td>Saves your settings locally and keeps a session-only threat history.</td></tr>
+    <tr><td>Host permissions (<code>chatgpt.com</code>, <code>chat.openai.com</code>, <code>claude.ai</code>, <code>gemini.google.com</code>)</td><td>Injects the content script into these pages to monitor prompt submissions.</td></tr>
+  </table>
+  <p>
+    The extension does <strong>not</strong> request <code>tabs</code>,
+    <code>webRequest</code>, <code>notifications</code>, <code>cookies</code>,
+    <code>history</code>, or any other permission. The "View Details"
+    button uses <code>chrome.tabs.create</code>, which is available to
+    extensions without the <code>tabs</code> permission.
+  </p>
+
+  <h2>5. Third-Party Services</h2>
+  <p>
+    The extension's popup contains a "View Details" button that opens
+    <code>https://app.parryai.com/dashboard</code> in a new tab. This is a
+    standard tab navigation — no data is passed in the request. The web app
+    is subject to its own privacy policy.
+  </p>
+  <p>
+    This release of ParryAI does not contain any API-key, account, or
+    cloud-sync feature. Detection is entirely local.
+  </p>
+
+  <h2>6. Children's Privacy</h2>
+  <p>
+    ParryAI is not directed at children under the age of 13. We do not
+    knowingly collect personal data from children.
+  </p>
+
+  <h2>7. Security</h2>
+  <p>
+    All detection processing occurs locally within the browser's extension
+    sandbox. The extension uses Chrome Manifest V3, which enforces a strict
+    Content Security Policy (no <code>eval</code>, no inline scripts),
+    isolated execution contexts for content scripts, and a separate
+    service worker with no persistent background state.
+  </p>
+
+  <h2>8. Changes to This Policy</h2>
+  <p>
+    We may update this policy as the extension evolves. Material changes
+    will be noted in the extension's changelog. The effective date at the
+    top of this document reflects the most recent revision.
+  </p>
+
+  <h2>9. Contact</h2>
+  <p>
+    For privacy questions or concerns, contact Saido Labs LLC at
+    <a href="mailto:privacy@saidolabs.com">privacy@saidolabs.com</a>.
+  </p>
+
+  <p style="margin-top:48px;color:#666;font-size:12.5px;text-align:center">
+    ParryAI — Detect. Deflect. Defend.
+  </p>
+</main>
+</body>
+</html>
